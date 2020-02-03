@@ -8,13 +8,31 @@ app = Flask(__name__)
 
 @app.route('/archive/<int:year>/<int:month>/<int:day>')
 def archive(year: int, month: int, day: int):
-    return jsonify(spon.archive.by_date(date(year, month, day)))
+    html = spon.archive.html_by_date(date(year, month, day))
+    content = spon.archive.scrape_html(html)
+
+    if request.args.get('include-html') is not None:
+        return jsonify({
+            'content': content,
+            'html': html,
+        })
+    else:
+        return jsonify(content)
 
 
 @app.route('/articles')
 def article():
     article_url = request.args.get('url')
-    return jsonify(spon.article.by_url(article_url))
+    html = spon.article.html_by_url(article_url)
+    content = spon.article.scrape_html(html)
+
+    if request.args.get('include-html') is not None:
+        return jsonify({
+            'content': content,
+            'html': html,
+        })
+    else:
+        return jsonify(content)
 
 
 @app.route('/articles/<article_id>/comments')
