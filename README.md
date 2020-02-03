@@ -1,4 +1,5 @@
-# spiegel-api
+# spiegel-api [![Docker Hub](https://img.shields.io/badge/docker-hub-blue)](https://hub.docker.com/r/ietz/spiegel-api)
+
 REST API for [DER SPIEGEL](https://www.spiegel.de/) written in python.
 Wrapper for the [spiegel-scraper](https://pypi.org/project/spiegel-scraper/) module.
 
